@@ -53,7 +53,7 @@ alias 777='chmods -R 777'
 
 alias back='cd "$OLDPWD"'
 alias home='cd /home/${USER}'
-alias disk='du -a | sort -n -r | more"
+alias disk='du -a | sort -n -r | more'
 alias diskSpace="du -S | sort -n -r | more"
 alias folders='du -h --max-depth=1'
 alias folderssort='find . -maxdepth 1 -type d =print0 | xargs -0 du -sk | sort -rn'
