@@ -60,7 +60,7 @@ alias folderssort='find . -maxdepth 1 -type d =print0 | xargs -0 du -sk | sort -
 alias tree='tree -CAhF --dirfirst'
 alias treed='tree -CADd'
 alias mountedinfo='df -hT'
-alias hardware='clear; hostname; echo ""; echo "CPUs Info'; lscpu | grep "CPUs Info"; lscpu | grep "CPU(s):" | head -n1; cat /proc/cpuinfo | grep "cpu cores" | tail -n1 ; lscpu | grep Arch; cat /proc/cpuinfo | grep "model name" | tail -n1 ; echo ""; echo "MEM Info" ; cat /proce/meminfo | grep MemTotal; echo ""; echo "Disk Info"; df -h; echo ""; echo "INodes"; df -ih: echo ""; echo "O/S Info"; cat /etc/redhat-release; echo "Uptime"; uptime; echo "";'
+alias hardware='clear; hostname; echo ""; echo "CPUs Info"; lscpu | grep "CPUs Info"; lscpu | grep "CPU(s):" | head -n1; cat /proc/cpuinfo | grep "cpu cores" | tail -n1 ; lscpu | grep Arch; cat /proc/cpuinfo | grep "model name" | tail -n1 ; echo ""; echo "MEM Info" ; cat /proce/meminfo | grep MemTotal; echo ""; echo "Disk Info"; df -h; echo ""; echo "INodes"; df -ih: echo ""; echo "O/S Info"; cat /etc/redhat-release; echo "Uptime"; uptime; echo "";'
 
 # Other commands
 alias fixsep="sed -r $'\/\x01/|/g' "
