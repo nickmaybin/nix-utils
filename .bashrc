@@ -20,6 +20,7 @@ alias countfiles-"for t in files links directories; do echo \`find . -type \${t:
 alias ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'"
 alias openports='netstat -nape --inet'
 alias compress='tar -cvf'
+alias fbs='du -hs * 2>dev/null | sort'
 
 # Directory Lists commands
 alias l='ls -ltr'
