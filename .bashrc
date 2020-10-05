@@ -65,3 +65,54 @@ alias hardware='clear; hostname; echo ""; echo "CPUs Info"; lscpu | grep "CPUs I
 
 # Other commands
 alias fixsep="sed -r $'\/\x01/|/g' "
+
+# Functions
+
+function up () {
+  local d =""
+  limit=$1
+  for ((i=1 ; i <= limit ; i++))
+    do
+      d=$d/..
+    done
+  d=$(echo $d | sed 's/^\///')
+  if [ -z "$d" ]; then
+    d=..
+  fi
+  cd $d
+}
+
+function cd () {
+  builtin cd "$1"
+  l
+  builtin pwd
+}
+
+function bigfiles () {
+  find . -type f -size +${1}k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'
+}
+
+function process () {
+  if [ $# -lt 1 ]; then
+    echo "Usage: process processName e.g. process java"
+  else
+    ps -ef | grep -i $1
+  fi
+}
+
+function switchUser () {
+  sudo -i -u $1
+}
+
+function backup () {
+  if [ $# -lt 2 ]; then
+    cp $1 $1.$(date '+%Y%m%d%H%M%S')
+  else
+    cp $1 $2/$1.$(date '+%Y%m%d%H%M%S')
+   fi
+}
+
+function next () {}
+
+
+
