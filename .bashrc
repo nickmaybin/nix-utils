@@ -112,7 +112,100 @@ function backup () {
    fi
 }
 
-function next () {}
+function tailLogFor () {
+  if [ $# -lt 2 ]; then
+    echo "Usage: tailLogFor logFile kudos e.g. tailLogFor application.log kudos (grep is case insensitive)"
+  else
+    tail -f $1 | grep -i $2
+  fi
+}
 
+function tailLog () {
+  if [ $# -lt 1 ]; then
+    echo "Usage: tailLog logFile e.g. tailLog application.log"
+  else
+    tail -f -n 200 $1
+  fi
+}
 
+function findOldFiles () {
+  if [ $# -lt 2 ]; then
+    echo "Usage: fileOldFiles filePath Age e.g. findOldFile . 100"
+  else
+    find $1 -mindepth 1 -mtime +$2 -print
+  fi
+}
 
+function createLink () {
+  if [ $# -lt 2 ]; then
+    echo "Usage: createLink fullPathToSource fullPathToLink"
+  else
+    ln -s $1 $2
+  fi
+}
+
+function removeLink () {
+  if [ $# -lt 1 ]; then
+    echo "Usage: removeLink fullPathToLink"
+  else
+    unlink $1
+  fi
+}
+
+function showAliases () {
+  if [ $# -lt 1 ]; then
+    grep "alias" /home/${USER}/.bashrc
+  else
+    grep "alias $1" /home/${USER}/.bashrc
+  fi
+}
+
+function showFunctions () {
+  if [ $# -lt 1 ]; then
+    grep "function" /home/${USER}/.bashrc
+  else
+    grep "function $1" /home/${USER}/.bashrc
+  fi
+}
+
+function findText () {
+  grep -iIHrnl --color=always "$1" . | less -r
+}
+
+function extract {
+ if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+ else
+    for n in "$@"
+    do
+      if [ -f "$n" ] ; then
+          case "${n%,}" in
+            *.cbt|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)                                      tar xvf "$n"       ;;
+            *.lzma)                                                                                          unlzma ./"$n"      ;;
+            *.bz2)                                                                                           bunzip2 ./"$n"     ;;
+            *.cbr|*.rar)                                                                                     unrar x -ad ./"$n" ;;
+            *.gz)                                                                                            gunzip ./"$n"      ;;
+            *.cbz|*.epub|*.zip)                                                                              unzip ./"$n"       ;;
+            *.z)                                                                                             uncompress ./"$n"  ;;
+            *.7z|*.apk|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)  7z x ./"$n"        ;;
+            *.xz)                                                                                            unxz ./"$n"        ;;
+            *.exe)                                                                                           cabextract ./"$n"  ;;
+            *.cpio)                                                                                          cpio -id < ./"$n"  ;;
+            *.cba|*.ace)                                                                                     unace x ./"$n"      ;;
+            *.zpaq)                                                                                          zpaq x ./"$n"      ;;
+            *.arc)                                                                                           arc e ./"$n"       ;;
+            *.cso)                                                                                           ciso 0 ./"$n" ./"$n.iso" && \ extract $n.iso && \rm -f $n ;;
+            *)
+            echo "extract: '$n' - unknown archive method"
+            return 1
+            ;;
+          esac
+      else
+          echo "'$n' - file does not exist"
+          return 1
+      fi
+    done
+fi
+}
