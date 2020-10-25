@@ -16,7 +16,7 @@ alias duUsed='du -ach | sort -h'
 alias topcpu="top -b -o +%CPU | head -17"
 alias topcpu="top -b -o +%MEM | head -17"
 alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)!00/(\$2+\$4+\$5)} END {print usage}' | awk '{printf(\"%.1f\n\", \$1)}'"
-alias countfiles-"for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
 alias ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'"
 alias openports='netstat -nape --inet'
 alias compress='tar -cvf'
