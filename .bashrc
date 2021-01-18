@@ -22,6 +22,25 @@ alias openports='netstat -nape --inet'
 alias compress='tar -cvf'
 alias fbs='du -hs * 2>dev/null | sort'
 
+#git commands
+alias gitLog="git log --graph --decorate --oneline --all"
+alias gitLogDate='git log --pretty=format:"%h %ad %s" --date=short --all'
+alias gitLogDetails="git log"
+alias gitAdd="date;git add ."
+alias gitAddAll="date;git add --all"
+alias gitCommit="date;git commit -m "
+alias gitPush="date;git push"
+alias gitPull="date;git pull"
+alias gitStatus="date;git status"
+alias gitCheckout="date;git checout"
+alias gitCheckoutMain="date;git checkout main"
+alias gitCheckoutBranch="date;git checkout -b "
+alias gitDiff="date;git diff"
+alias gitRestore="date;git restore"
+function glf() { git log --all --grep="$1"; }
+
+alias dev="cd /c/sandbox/scratch/volume-match-app"
+
 # Directory Lists commands
 alias l='ls -ltr'
 alias la='ls -ltra'
